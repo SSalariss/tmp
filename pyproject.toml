@@ -1,0 +1,17 @@
+[project]
+name = "gui"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "opencv-python",
+    "numpy",
+    "pillow",
+    "playsound3",
+    "ultralytics",
+    "scikit-learn>=1.7.2",
+    "imageio>=2.37.0",
+    "matplotlib>=3.10.7",
+    "tqdm>=4.67.1",
+]

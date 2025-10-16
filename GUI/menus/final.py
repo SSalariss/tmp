@@ -10,7 +10,7 @@ class FinalMenu():
 
     _master: tk.Widget
     _background: AdaptCanvas
-    _BACKGROUND_PATH: str = "resources\\menus\\final_menu\\background.png"
+    _BACKGROUND_PATH: str = "GUI/resources/menus/final_menu/background.png"
 
 
     def __init__(self, master: tk.Widget):

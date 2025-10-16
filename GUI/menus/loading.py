@@ -15,8 +15,8 @@ class LoadingMenu:
     del progetto.
     """
     # Class costants
-    _BACKGROUND_PATH: str = "resources\\menus\\loading_menu\\background.png"
-    _GIF_PATH: str = "resources\\menus\\loading_menu\\loading.gif"
+    _BACKGROUND_PATH: str = "GUI/resources/menus/loading_menu/background.png"
+    _GIF_PATH: str = "GUI/resources/menus/loading_menu/loading.gif"
     
     # Class attributes
     _master: tk.Widget

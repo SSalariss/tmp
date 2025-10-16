@@ -19,7 +19,7 @@ class MainMenu():
     # Class attributes
     _master: tk.Widget
     _background: AdaptCanvas
-    _BACKGROUND_PATH: str = "resources\\menus\\main_menu\\background.png"
+    _BACKGROUND_PATH: str = "GUI/resources/menus/main_menu/background.png"
 
     # Button
     _button: BorderButtonFileChooser
@@ -77,4 +77,4 @@ class MainMenu():
 
     def __init_music__(self):
         """ Inizializza la musica di sottofondo del menu. """
-        winsound.PlaySound("resources\\sounds\\menu\\music.wav", winsound.SND_LOOP | winsound.SND_ASYNC)
+        winsound.PlaySound("GUI/resources/sounds/menu/music.wav", winsound.SND_LOOP | winsound.SND_ASYNC)

@@ -15,7 +15,7 @@ from typing import Optional, Callable, Literal
 # Custom classes
 from custom_data_type.adaptcanvas import AdaptCanvas
 from custom_data_type.canvasitem import AdaptCanvasItem, AdaptCanvasGIF
-from resize import Resize
+from utils.resize import Resize
 
 
 

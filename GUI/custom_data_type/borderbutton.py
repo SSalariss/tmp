@@ -10,7 +10,7 @@ from abc import abstractmethod
 from typing import Optional, IO, Any
 
 # playsound
-from playsound import playsound
+from playsound3 import playsound
 
 
 class FileChooser(ABC):
@@ -194,7 +194,7 @@ class BorderButton(BorderButtonABC):
     def __click_sound__(self):
         """ Riproduce il suono di un click. """
         # Riproduco il suono associato al pulsante.
-        playsound("resources\\sounds\\effects\\mouse_click_effect.wav", False)
+        playsound("GUI/resources/sounds/effects/mouse_click_effect.wav", False)
 
 
     def __on_click__(self):

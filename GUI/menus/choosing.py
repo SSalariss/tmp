@@ -15,7 +15,7 @@ class ChoosingMenu():
     _master: tk.Widget
     _file: IO[Any]
     _background: AdaptCanvas
-    _BACKGROUND_PATH: str = "resources\\menus\\choosing_menu\\background.png"
+    _BACKGROUND_PATH: str = "GUI/resources/menus/choosing_menu/background.png"
 
     def __init__(self, master: tk.Widget, file: IO[Any]) -> None:
         #! IN REALTA' NON MI SERVE IL FILE

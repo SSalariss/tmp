@@ -1,10 +1,10 @@
 import tkinter as tk
-from custom_data_type.adaptcanvas import AdaptCanvas, AdaptCanvasItem
-from custom_data_type.borderbutton import BorderButton
+from GUI.custom_data_type.adaptcanvas import AdaptCanvas, AdaptCanvasItem
+from GUI.custom_data_type.borderbutton import BorderButton
 
 from typing import IO, Any
-from utils.resize import Resize
-from utils.signals import Signals
+from GUI.utils.resize import Resize
+from GUI.utils.signals import Signals
 
 
 class ChoosingMenu():
@@ -13,16 +13,16 @@ class ChoosingMenu():
 
     # Class attributes
     _master: tk.Widget
-    _file: IO[Any]
+    _file_path: str
     _background: AdaptCanvas
     _BACKGROUND_PATH: str = "GUI/resources/menus/choosing_menu/background.png"
 
-    def __init__(self, master: tk.Widget, file: IO[Any]) -> None:
+    def __init__(self, master: tk.Widget, file_path: str) -> None:
         #! IN REALTA' NON MI SERVE IL FILE
         #! DEL PULSANTE MA IL FILE RISULTATO
         #! DELLA COMPUTAZIONE!
         self._master = master
-        self._file = file
+        self._file_path = file_path
         self.__init_background__()
 
 
@@ -68,7 +68,7 @@ class ChoosingMenu():
         image_frame.grid(column=2, columnspan=3, row=1, sticky="nswe")
 
         image_canvas = AdaptCanvas(image_frame)
-        image_canvas.add_image(self._file.name, resize_func=Resize.resize)
+        image_canvas.add_image(self._file_path, resize_func=Resize.resize)
         image_canvas.pack(fill="both", expand=True)
 
         teamA = BorderButton(self._background, 1, "#23AECA", text="Team A", font=("Aerial", 20), cursor="hand2")

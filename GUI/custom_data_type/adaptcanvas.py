@@ -17,7 +17,7 @@ from typing import Optional, Callable, Literal
 import os
 
 # Custom classes
-from custom_data_type.canvasitem import AdaptCanvasItem
+from GUI.custom_data_type.canvasitem import AdaptCanvasItem
 
 class AdaptCanvasABC(tk.Canvas, ABC):
     """

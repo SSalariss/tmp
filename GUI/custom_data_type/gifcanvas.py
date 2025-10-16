@@ -13,9 +13,9 @@ from abc import abstractmethod
 from typing import Optional, Callable, Literal
 
 # Custom classes
-from custom_data_type.adaptcanvas import AdaptCanvas
-from custom_data_type.canvasitem import AdaptCanvasItem, AdaptCanvasGIF
-from utils.resize import Resize
+from GUI.custom_data_type.adaptcanvas import AdaptCanvas
+from GUI.custom_data_type.canvasitem import AdaptCanvasItem, AdaptCanvasGIF
+from GUI.utils.resize import Resize
 
 
 

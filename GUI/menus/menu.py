@@ -2,11 +2,11 @@ import tkinter as tk
 
 import winsound
 
-from custom_data_type.canvasitem import AdaptCanvasItem
-from custom_data_type.adaptcanvas import AdaptCanvas
-from custom_data_type.borderbutton import BorderButtonFileChooser
-from utils.signals import Signals
-from utils.resize import Resize
+from GUI.custom_data_type.canvasitem import AdaptCanvasItem
+from GUI.custom_data_type.adaptcanvas import AdaptCanvas
+from GUI.custom_data_type.borderbutton import BorderButtonFileChooser
+from GUI.utils.signals import Signals
+from GUI.utils.resize import Resize
 
 class MainMenu():
     """

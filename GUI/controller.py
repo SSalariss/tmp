@@ -1,15 +1,17 @@
 import tkinter as tk
 
-from menus.menu import MainMenu
-from menus.loading import LoadingMenu
-from menus.choosing import ChoosingMenu
-from menus.final import FinalMenu
+from GUI.menus.menu import MainMenu
+from GUI.menus.loading import LoadingMenu
+from GUI.menus.choosing import ChoosingMenu
+from GUI.menus.final import FinalMenu
 
-from utils.signals import Signals
+from GUI.utils.signals import Signals
 
-from custom_data_type.borderbutton import FileChooser
+from GUI.custom_data_type.borderbutton import FileChooser
 
 from threading import Thread
+
+from main_model import ModelManager as Model
 
 class Controller:
     """
@@ -18,6 +20,8 @@ class Controller:
     """
     # Class Attributes
     _main_window: tk.Tk
+
+    _model : Model
     
 
     def __init__(self):
@@ -27,6 +31,9 @@ class Controller:
         """
         # Inizializzo la finestra root
         self.__init_main_window__()
+
+        # Inizializzo il modello
+        self.__init_model__()
 
         # Inizializzo la gestione dei segnali
         self.__init_signals_handler__()
@@ -42,6 +49,11 @@ class Controller:
         # Qualsiasi altro menu che si vuole creare, compreso il main menu,
         # deve essere creato soltanto dopo un evento, questa e' l'unica eccezione. 
         self.__init_menu__(None)
+        
+
+
+    def __init_model__(self):
+        self._model = Model()
 
 
     def __init_main_window__(self):
@@ -110,13 +122,12 @@ class Controller:
         # Libera la finestra root da tutti i widget
         self.__clear__()
 
-        # !Qui ci andrebbe la chiamata alla funzione
-        # !del modello che rileva l'homografia dei
-        # !giocatori.
-        # !file = homography(file)
-
+        # * Chiamata al modello
+        self._model.step_select_image(file)
+        result_path = self._model.step_attack_prediction()
+        
         # Inizializza il menu di scelta.
-        ChoosingMenu(self._main_window, file)
+        ChoosingMenu(self._main_window, result_path)
 
     def __init_loading_menu__(self, event: tk.Event):
         """ Inizializza il menu di caricamento. """
@@ -128,25 +139,24 @@ class Controller:
         LoadingMenu(self._main_window)
 
         # Chiamata al modello
-        Thread(target=self.__testing__, args=(team,), daemon=True).start()
+        Thread(target=self.__get_prediction__, args=(team,), daemon=True).start()
         
 
 
 
 
-    def __testing__(self, team: str):
-        """ SIMULAZIONE CHIAMATA AL MODELLO """
-        for _ in range(50_000):
-            print(_)
-        self._main_window.after(0, lambda: self.__init_final_menu__(None))
+    def __get_prediction__(self, team: str):
+        print(f"clicked team: {team}")
+        result_path = self._model.step_offside_detection(team)
+        self._main_window.after(2000, lambda: self.__init_final_menu__(None, result_path))
 
 
 
 
-    def __init_final_menu__(self, event: tk.Event):
+    def __init_final_menu__(self, event: tk.Event, result_path):
         """ Inizializza il menu finale. """
         self.__clear__()
-        FinalMenu(self._main_window)
+        FinalMenu(self._main_window, result_path)
 
 
 

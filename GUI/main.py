@@ -1,5 +1,7 @@
-from controller import Controller
+from GUI.controller import Controller
 
 
-Controller().start()
+
+def start(): 
+    Controller().start()
 

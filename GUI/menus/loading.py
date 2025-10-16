@@ -2,9 +2,9 @@ import tkinter as tk
 
 from PIL.Image import Image
 
-from custom_data_type.gifcanvas import GifCanvas
-from custom_data_type.canvasitem import AdaptCanvasItem, AdaptCanvasGIF
-from utils.resize import Resize
+from GUI.custom_data_type.gifcanvas import GifCanvas
+from GUI.custom_data_type.canvasitem import AdaptCanvasItem, AdaptCanvasGIF
+from GUI.utils.resize import Resize
 
 
 class LoadingMenu:

@@ -1,19 +1,21 @@
 import tkinter as tk
 
-from custom_data_type.adaptcanvas import AdaptCanvas
-from custom_data_type.borderbutton import BorderButton
-from utils.resize import Resize
-from utils.signals import Signals
+from GUI.custom_data_type.adaptcanvas import AdaptCanvas
+from GUI.custom_data_type.borderbutton import BorderButton
+from GUI.utils.resize import Resize
+from GUI.utils.signals import Signals
 
 
 class FinalMenu():
 
     _master: tk.Widget
     _background: AdaptCanvas
+    _result_image_path: str
     _BACKGROUND_PATH: str = "GUI/resources/menus/final_menu/background.png"
 
 
-    def __init__(self, master: tk.Widget):
+    def __init__(self, master: tk.Widget, result_image_path: str):
+        self._result_image_path = result_image_path
         self._master = master
         self.__init_background__()
 
@@ -34,8 +36,9 @@ class FinalMenu():
         self._background.rowconfigure(3, weight=1)      # Pulsanti
         self._background.rowconfigure(4, weight=2)      # Spazio in basso
 
-        immagine = tk.Frame(self._background, background="black")
+        immagine = AdaptCanvas(self._background)
         immagine.grid(column=1, columnspan=3, row=1, sticky="nswe")
+        immagine.add_image(self._result_image_path, resize_func=Resize.resize)
 
         button = BorderButton(self._background, 1, "#23AECA", text="Riprova", font=("Aerial", 20), cursor="hand2")
         button.get_frame().grid(row=3, column=2, sticky="nswe")

@@ -1,7 +1,7 @@
 from PIL import ImageTk
 from PIL.Image import Image, Resampling
 
-from custom_data_type.canvasitem import AdaptCanvasItem
+from GUI.custom_data_type.canvasitem import AdaptCanvasItem
 
 class Resize:
 

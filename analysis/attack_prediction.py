@@ -37,9 +37,9 @@ def predictTeamAttacking(players_classification, img):
             area = abs(area) / 2.0
             return area
         
-        if not os.path.exists("result"):
-            os.makedirs("result")
-        cv2.imwrite(os.path.join("result", "PolygonsPlayerPoints.png"), img_empty)
+        if not os.path.exists("results"):
+            os.makedirs("results")
+        cv2.imwrite(os.path.join("results", "PolygonsPlayerPoints.png"), img_empty)
 
         area_points_team_1 = calculate_area(hull_points_team_1.squeeze())
         area_points_team_2 = calculate_area(hull_points_team_2.squeeze())

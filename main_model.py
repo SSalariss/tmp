@@ -51,6 +51,7 @@ class ModelManager:
         results = model(self._image_path)
         os.makedirs(self._results_dir, exist_ok=True)
 
+        
         boxes, classes = results[0].boxes.xyxy.tolist(), results[0].boxes.cls.tolist()
 
         self._players_classification, self._color_classification = team_classification_complete(boxes, classes, self._image)

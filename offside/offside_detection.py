@@ -20,6 +20,32 @@ def putPng(image, tag, position) -> None:
         combinata = cv2.add(sfondo_bg, sovrapposta_fg)
         image[y:y+altezza_sovrapposta, x:x+larghezza_sovrapposta] = combinata
 
+def extend_line_to_image_borders(p1, p2, image_shape):
+    h_img, w_img = image_shape[:2]
+    x1, y1 = p1
+    x2, y2 = p2
+
+    if abs(x2 - x1) < 1e-6:
+        # Linea verticale, traccia da top a bottom con x costante
+        x = int(round(x1))
+        return (x, 0), (x, h_img - 1)
+
+    m = (y2 - y1) / (x2 - x1)
+    q = y1 - m * x1
+
+    y_left = q
+    y_right = m * (w_img - 1) + q
+
+    # Clip y values all’interno dell’immagine
+    y_left_clipped = max(0, min(h_img - 1, int(round(y_left))))
+    y_right_clipped = max(0, min(h_img - 1, int(round(y_right))))
+
+    point_left = (0, y_left_clipped)
+    point_right = (w_img - 1, y_right_clipped)
+
+    return point_left, point_right
+
+
 def drawOffside(pathImage: str, team: str, colors: dict, homography: torch.Tensor, 
                 defender: list, attacker: list, goalkeeper: list = None) -> int:
     """
@@ -95,7 +121,9 @@ def drawOffside(pathImage: str, team: str, colors: dict, homography: torch.Tenso
         invex_homo = torch.inverse(homography)
         p1 = convertPoint2Dto3D(invex_homo, [last_def[0], 0], w, h)
         p2 = convertPoint2Dto3D(invex_homo, [last_def[0], 680], w, h)
-        cv2.line(image, (int(p1[0]), int(p1[1])), (int(p2[0]), int(p2[1])), (0, 255, 255), 3)
+        p1_ext, p2_ext = extend_line_to_image_borders(p1, p2, image.shape)
+        cv2.line(image, p1_ext, p2_ext, (0, 255, 255), 3)
+        #cv2.line(image, (int(p1[0]), int(p1[1])), (int(p2[0]), int(p2[1])), (0, 255, 255), 3)
         
         for i, p in enumerate(attacker2D):
             if p[0] < last_def[0]:
@@ -110,8 +138,10 @@ def drawOffside(pathImage: str, team: str, colors: dict, homography: torch.Tenso
         invex_homo = torch.inverse(homography)
         p1 = convertPoint2Dto3D(invex_homo, [last_def[0], 0], w, h)
         p2 = convertPoint2Dto3D(invex_homo, [last_def[0], 680], w, h)
-        cv2.line(image, (int(p1[0]), int(p1[1])), (int(p2[0]), int(p2[1])), (0, 255, 255), 3)
-        
+        p1_ext, p2_ext = extend_line_to_image_borders(p1, p2, image.shape)
+        cv2.line(image, p1_ext, p2_ext, (0, 255, 255), 3)
+        #cv2.line(image, (int(p1[0]), int(p1[1])), (int(p2[0]), int(p2[1])), (0, 255, 255), 3)
+
         for i, p in enumerate(attacker2D):
             if p[0] > last_def[0]:
                 offside.append(p)
